@@ -6,4 +6,6 @@
     <string name="user_products">Mis Productos</string>
     <string name="settings">Configuraciones</string>
     <string name="close_session">Cerrar sesión</string>
+    <string name="open_drawer_menu">Abrir menu</string>
+    <string name="go_back">Ir hacia atrás</string>
 </resources>

@@ -5,8 +5,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -37,12 +40,53 @@ fun NavigationGraph(
     navController: NavHostController, homeScreenViewModel: ProductViewModel = hiltViewModel()
 ) {
 
+    val appName = stringResource(id = R.string.app_name)
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val appBarTitle by remember {
+        mutableStateOf(appName)
+    }
+    var areInDetailScreen by rememberSaveable {
+        mutableStateOf(false)
+    }
 
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                elevation = 8.dp
+            ) {
+                IconButton(modifier = Modifier, onClick = {
+                    if (areInDetailScreen) {
+                        navController.popBackStack()
+                    } else {
+                        scope.launch {
+                            scaffoldState.drawerState.open()
+                        }
+                    }
+
+                }) {
+                    if (!areInDetailScreen) {
+
+                        Icon(
+                            Icons.Default.Menu,
+                            contentDescription = stringResource(id = R.string.open_drawer_menu)
+                        )
+                    } else {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = stringResource(id = R.string.go_back)
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = appBarTitle)
+            }
+        },
         drawerContent = {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -139,6 +183,7 @@ fun NavigationGraph(
                 route = NavigationRoute.SplashRoute.route,
             )
             {
+
                 SplashScreen(navController = navController)
             }
 
@@ -153,6 +198,7 @@ fun NavigationGraph(
                 route = NavigationRoute.HomeScreenRoute.route,
             )
             {
+                areInDetailScreen = false
                 HomeScreen(
                     navController = navController,
                     productViewModel = homeScreenViewModel
@@ -162,6 +208,7 @@ fun NavigationGraph(
                 route = NavigationRoute.DetailScreenRoute.route,
             )
             {
+                areInDetailScreen = true
                 DetailScreen(
                     navController = navController,
                     productViewModel = homeScreenViewModel
@@ -172,6 +219,7 @@ fun NavigationGraph(
                 route = NavigationRoute.ProfileScreenRoute.route,
             )
             {
+                areInDetailScreen = false
                 DevScreen(NavigationRoute.ProfileScreenRoute.route)
             }
 
@@ -179,6 +227,7 @@ fun NavigationGraph(
                 route = NavigationRoute.UserProductsScreenRoute.route,
             )
             {
+                areInDetailScreen = false
                 DevScreen(NavigationRoute.UserProductsScreenRoute.route)
             }
 
@@ -187,6 +236,7 @@ fun NavigationGraph(
                     .route,
             )
             {
+                areInDetailScreen = false
                 DevScreen(NavigationRoute.SettingsScreenRoute
                     .route)
             }
