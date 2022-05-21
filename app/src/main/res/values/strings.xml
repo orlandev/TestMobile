@@ -2,4 +2,8 @@
     <string name="app_name">TestMobile</string>
     <string name="home">Inicio</string>
     <string name="loading_products">Cargando...</string>
+    <string name="profile">Perfil</string>
+    <string name="user_products">Mis Productos</string>
+    <string name="settings">Configuraciones</string>
+    <string name="close_session">Cerrar sesión</string>
 </resources>

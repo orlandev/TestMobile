@@ -23,4 +23,23 @@ sealed class NavigationRoute(
 
     object DetailScreenRoute : NavigationRoute(route = "DetailScreenRoute")
 
+    object ProfileScreenRoute : NavigationRoute(
+        route = "ProfileScreenRoute",
+        resourceDrawableId = R.drawable.ic_round_person_pin_24,
+        resourceStringId = R.string.profile
+    )
+
+    object UserProductsScreenRoute : NavigationRoute(
+        route = "UserProductsScreenRoute",
+        resourceDrawableId = R.drawable.ic_baseline_shopping_cart_24,
+        resourceStringId = R.string.user_products,
+    )
+
+    object SettingsScreenRoute : NavigationRoute(
+        route = "SettingsScreenRoute",
+        resourceDrawableId = R.drawable.ic_baseline_settings_24,
+        resourceStringId = R.string.settings,
+    )
+
+
 }
