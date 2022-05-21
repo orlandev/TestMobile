@@ -12,6 +12,7 @@ sealed class NavigationRoute(
     argument: String? = null
 ) {
 
+    object SplashRoute : NavigationRoute(route = "SplashRoute")
     object LoginRoute : NavigationRoute(route = "LoginRoute")
 
     object HomeScreenRoute :
