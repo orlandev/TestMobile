@@ -1,6 +1,5 @@
 package com.orlandev.testmobile.ui.screens.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
@@ -58,47 +57,4 @@ fun HomeScreen(
             }
         }
     }
-
-
-
-/*
-
-    val pager = remember {
-        Pager(
-            PagingConfig(
-                pageSize = myBackend.DataBatchSize,
-                enablePlaceholders = true,
-                maxSize = 200
-            )
-        ) { homeScreenViewModel.products }
-    }
-
-    val lazyPagingItems = pager.flow.collectAsLazyPagingItems()
-
-    LazyColumn {
-        if (lazyPagingItems.loadState.refresh == LoadState.Loading) {
-            item {
-                Text(
-                    text = "Waiting for items to load from the backend",
-                    modifier = Modifier.fillMaxWidth()
-                        .wrapContentWidth(Alignment.CenterHorizontally)
-                )
-            }
-        }
-
-        itemsIndexed(lazyPagingItems) { index, item ->
-            Text("Index=$index: $item", fontSize = 20.sp)
-        }
-
-        if (lazyPagingItems.loadState.append == LoadState.Loading) {
-            item {
-                CircularProgressIndicator(
-                    modifier = Modifier.fillMaxWidth()
-                        .wrapContentWidth(Alignment.CenterHorizontally)
-                )
-            }
-        }
-    }
-*/
-
 }
