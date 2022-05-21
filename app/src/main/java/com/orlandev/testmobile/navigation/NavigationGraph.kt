@@ -36,7 +36,7 @@ fun NavigationGraph(
                 .fillMaxSize()
                 .padding(it),
             navController = navController,
-            startDestination = NavigationRoute.SplashRoute.route
+            startDestination = NavigationRoute.HomeScreenRoute.route
         )
         {
 

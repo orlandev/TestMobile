@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TestMobile</string>
     <string name="home">Inicio</string>
+    <string name="loading_products">Cargando...</string>
 </resources>
