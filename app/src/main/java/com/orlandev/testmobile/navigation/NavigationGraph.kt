@@ -71,6 +71,18 @@ fun NavigationGraph(
                 }
 
                 DrawerItem(
+                    painter = painterResource(id = NavigationRoute.HomeScreenRoute.resourceDrawableId!!),
+                    stringResource(id = NavigationRoute.HomeScreenRoute.resourceStringId!!)
+                ) {
+                    scope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                    navController.navigate(NavigationRoute.HomeScreenRoute.route)
+                }
+
+                Divider()
+
+                DrawerItem(
                     painter = painterResource(id = NavigationRoute.ProfileScreenRoute.resourceDrawableId!!),
                     stringResource(id = NavigationRoute.ProfileScreenRoute.resourceStringId!!)
                 ) {
