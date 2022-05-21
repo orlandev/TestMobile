@@ -14,12 +14,13 @@ sealed class NavigationRoute(
 
     object SplashRoute : NavigationRoute(route = "SplashRoute")
     object LoginRoute : NavigationRoute(route = "LoginRoute")
-
     object HomeScreenRoute :
         NavigationRoute(
             route = "HomeScreen",
             resourceDrawableId = R.drawable.ic_round_home_24,
             resourceStringId = R.string.home
         )
+
+    object DetailScreenRoute : NavigationRoute(route = "DetailScreenRoute")
 
 }

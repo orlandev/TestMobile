@@ -11,6 +11,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.orlandev.testmobile.ui.screens.home.HomeScreen
 import com.orlandev.testmobile.ui.screens.login.LoginScreen
+import com.orlandev.testmobile.ui.screens.product_detail.DetailScreen
 import com.orlandev.testmobile.ui.screens.splash.SplashScreen
 
 
@@ -50,6 +51,14 @@ fun NavigationGraph(
             )
             {
                 HomeScreen(
+                    navController = navController
+                )
+            }
+            composable(
+                route = NavigationRoute.DetailScreenRoute.route,
+            )
+            {
+                DetailScreen(
                     navController = navController
                 )
             }
