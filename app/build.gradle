@@ -78,13 +78,18 @@ dependencies {
 
 
     //Accompanist
-    def accompanist_version="0.24.6-alpha"
+    def accompanist_version = "0.24.6-alpha"
     api "com.google.accompanist:accompanist-placeholder-material:$accompanist_version"
     api "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
     api "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
     api "com.google.accompanist:accompanist-insets:$accompanist_version"
     api "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
     api "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
+
+    //For runBlockingTest, CoroutineDispatcher etc.
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
+//For InstantTaskExecutorRule
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
