@@ -1,6 +1,7 @@
 package com.orlandev.testmobile.utils
 
 import com.orlandev.testmobile.domain.model.Product
+import java.util.*
 import kotlin.random.Random
 
 fun generateFakeProducts(): List<Product> {
@@ -9,6 +10,7 @@ fun generateFakeProducts(): List<Product> {
     for (i in 1..MAX_PRODUCTS_BY_PAGE) {
         list.add(
             Product(
+                id = UUID.randomUUID().toString(),
                 name = "ProductName",
                 description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 thumbnailUrl = "https://source.unsplash.com/random/${

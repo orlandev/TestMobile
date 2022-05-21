@@ -32,15 +32,17 @@ import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
 import com.orlandev.testmobile.R
 import com.orlandev.testmobile.domain.model.Product
+import com.orlandev.testmobile.navigation.NavigationRoute
+import com.orlandev.testmobile.ui.screens.ProductViewModel
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    homeScreenViewModel: HomeScreenViewModel = hiltViewModel()
+    productViewModel: ProductViewModel = hiltViewModel()
 ) {
 
     val productLazyList: LazyPagingItems<Product> =
-        homeScreenViewModel.products.collectAsLazyPagingItems()
+        productViewModel.products.collectAsLazyPagingItems()
 
 
     LazyVerticalGrid(
@@ -49,34 +51,10 @@ fun HomeScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(productLazyList) { currentProduct ->
-
-            Card(
-                elevation = 0.dp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp).clickable {
-
-                    }
-            ) {
-                Column(
-                    Modifier
-                        .fillMaxSize()
-                ) {
-                    ShimmerImage(
-                        imgUrl = currentProduct!!.thumbnailUrl,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                    )
-
-                    Spacer(modifier = Modifier.height(4.dp))
-
-                    Text(text = currentProduct!!.name, style = MaterialTheme.typography.caption)
-
-                }
+            ProductItem(currentProduct) {
+                productViewModel.onSelectProduct(currentProduct!!)
+                navController.navigate(NavigationRoute.DetailScreenRoute.route)
             }
-
         }
         productLazyList.apply {
             when {
@@ -133,6 +111,44 @@ fun HomeScreen(
     }
 }
 
+@Composable
+fun ProductItem(currentProduct: Product?, onItemClick: () -> Unit) {
+    Card(
+        elevation = 10.dp,
+        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable {
+                onItemClick()
+            }
+    ) {
+        Column(
+            Modifier
+                .fillMaxSize()
+        ) {
+            ShimmerImage(
+                imgUrl = currentProduct!!.thumbnailUrl,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clip(RoundedCornerShape(20.dp))
+            )
+
+            Spacer(modifier = Modifier.height(2.dp))
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp, vertical = 4.dp),
+                text = currentProduct!!.name,
+                style = MaterialTheme.typography.caption
+            )
+
+        }
+    }
+}
+
 inline fun <T : Any> LazyGridScope.items(
     items: LazyPagingItems<T>,
     crossinline itemContent: @Composable LazyGridItemScope.(item: T?) -> Unit
@@ -154,7 +170,7 @@ fun ShimmerImage(
         rememberImagePainter(
             data = imgUrl,
             builder = {
-                crossfade(true)
+                crossfade(700)
             })
 
     val state = painter.state is AsyncImagePainter.State.Loading

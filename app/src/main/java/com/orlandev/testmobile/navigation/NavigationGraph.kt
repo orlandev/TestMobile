@@ -9,9 +9,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import com.orlandev.testmobile.ui.screens.ProductViewModel
 import com.orlandev.testmobile.ui.screens.home.HomeScreen
 import com.orlandev.testmobile.ui.screens.login.LoginScreen
 import com.orlandev.testmobile.ui.screens.product_detail.DetailScreen
@@ -21,7 +23,7 @@ import com.orlandev.testmobile.ui.screens.splash.SplashScreen
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NavigationGraph(
-    navController: NavHostController,
+    navController: NavHostController, homeScreenViewModel: ProductViewModel = hiltViewModel()
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -59,7 +61,8 @@ fun NavigationGraph(
             )
             {
                 HomeScreen(
-                    navController = navController
+                    navController = navController,
+                    productViewModel = homeScreenViewModel
                 )
             }
             composable(
@@ -67,7 +70,8 @@ fun NavigationGraph(
             )
             {
                 DetailScreen(
-                    navController = navController
+                    navController = navController,
+                    productViewModel = homeScreenViewModel
                 )
             }
         }
