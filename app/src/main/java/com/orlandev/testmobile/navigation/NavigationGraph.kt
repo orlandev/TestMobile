@@ -17,6 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,6 +32,7 @@ import com.orlandev.testmobile.ui.screens.home.HomeScreen
 import com.orlandev.testmobile.ui.screens.login.LoginScreen
 import com.orlandev.testmobile.ui.screens.product_detail.DetailScreen
 import com.orlandev.testmobile.ui.screens.splash.SplashScreen
+import com.orlandev.testmobile.utils.ForegroundGradientEffect
 import kotlinx.coroutines.launch
 
 
@@ -94,11 +96,13 @@ fun NavigationGraph(
                 horizontalAlignment = Alignment.Start
             ) {
 
-                Card(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
-                ) {
+                )
+                {
+
                     Image(
                         painter = painterResource(id = R.drawable.stock),
                         contentDescription = stringResource(
@@ -106,13 +110,16 @@ fun NavigationGraph(
                         ), contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
+                    ForegroundGradientEffect(backgroundColor = MaterialTheme.colors.background)
                     Text(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .align(Alignment.BottomStart),
                         text = stringResource(id = R.string.app_name),
                         textAlign = TextAlign.Center,
-                        style = TextStyle(fontSize = 19.sp)
+                        style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 23.sp)
                     )
                 }
+
 
                 DrawerItem(
                     painter = painterResource(id = NavigationRoute.HomeScreenRoute.resourceDrawableId!!),
@@ -183,7 +190,6 @@ fun NavigationGraph(
                 route = NavigationRoute.SplashRoute.route,
             )
             {
-
                 SplashScreen(navController = navController)
             }
 
