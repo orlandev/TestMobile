@@ -1,11 +1,8 @@
 package com.orlandev.testmobile.di
 
 import com.orlandev.testmobile.data.api.FakeApiService
-import com.orlandev.testmobile.data.repositories.RemoteRepository
 import com.orlandev.testmobile.data.source.remote.FakeRemoteDataSource
 import com.orlandev.testmobile.domain.api.ApiService
-import com.orlandev.testmobile.domain.repository.DataRepository
-import com.orlandev.testmobile.domain.source.DataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,13 +20,9 @@ object AppModule {
     }
 
     @Provides
-    fun provideRemoteDataSource(apiService: ApiService): DataSource {
+    fun provideRemoteDataSource(apiService: ApiService): FakeRemoteDataSource {
         return FakeRemoteDataSource(apiService = apiService)
     }
 
-    @Provides
-    fun provideRemoteRepository(dataSource: FakeRemoteDataSource): DataRepository {
-        return RemoteRepository(dataSource)
-    }
 
 }
