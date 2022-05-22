@@ -113,7 +113,8 @@ fun NavigationGraph(
                     ForegroundGradientEffect(backgroundColor = MaterialTheme.colors.background)
                     Text(
                         modifier = Modifier
-                            .align(Alignment.BottomStart),
+                            .align(Alignment.BottomStart)
+                            .padding(8.dp),
                         text = stringResource(id = R.string.app_name),
                         textAlign = TextAlign.Center,
                         style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 23.sp)

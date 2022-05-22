@@ -8,7 +8,7 @@ import kotlinx.coroutines.delay
 class FakeApiService : ApiService {
     override suspend fun getProductList(): List<Product> {
         //Simula la espera al hacer una peticiòn a un API
-        delay(4000)
+        delay(3000)
         return generateFakeProducts()
     }
 }

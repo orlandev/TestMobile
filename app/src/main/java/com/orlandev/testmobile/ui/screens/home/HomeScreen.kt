@@ -141,7 +141,7 @@ fun ProductItem(currentProduct: Product?, onItemClick: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp, vertical = 4.dp),
-                text = currentProduct!!.name,
+                text = currentProduct.name,
                 style = MaterialTheme.typography.caption
             )
 
