@@ -1,6 +1,5 @@
 package com.orlandev.testmobile.ui.screens
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -34,8 +33,5 @@ class ProductViewModel @Inject constructor(private val apiService: ApiService) :
           productSelected.value = product
      }
 
-     init {
-          Log.d("HOME_VIEW_MODEL", "INITIALIZED")
-     }
 
 }

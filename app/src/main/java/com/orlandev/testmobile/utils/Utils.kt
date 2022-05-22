@@ -20,10 +20,7 @@ fun generateFakeProducts(): List<Product> {
                 id = UUID.randomUUID().toString(),
                 name = "ProductName",
                 description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                price = Random.nextDouble(
-                    10.00,
-                    100.99
-                ),
+                price = Math.round(Random.nextDouble(10.00, 100.99) * 100.0) / 100.0,
                 thumbnailUrl = "https://source.unsplash.com/random/${
                     Random.nextInt(
                         300,
