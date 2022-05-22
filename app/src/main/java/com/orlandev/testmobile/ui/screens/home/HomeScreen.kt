@@ -1,11 +1,8 @@
 package com.orlandev.testmobile.ui.screens.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
-import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -16,8 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,24 +20,21 @@ import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberImagePainter
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.placeholder
-import com.google.accompanist.placeholder.shimmer
+import com.orlandev.testmobile.MainViewModel
 import com.orlandev.testmobile.R
 import com.orlandev.testmobile.domain.model.Product
 import com.orlandev.testmobile.navigation.NavigationRoute
-import com.orlandev.testmobile.ui.screens.ProductViewModel
+import com.orlandev.testmobile.utils.ShimmerImage
+import com.orlandev.testmobile.utils.items
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    productViewModel: ProductViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = hiltViewModel()
 ) {
 
     val productLazyList: LazyPagingItems<Product> =
-        productViewModel.products.collectAsLazyPagingItems()
+        mainViewModel.products.collectAsLazyPagingItems()
 
 
     LazyVerticalGrid(
@@ -52,7 +44,7 @@ fun HomeScreen(
     ) {
         items(productLazyList) { currentProduct ->
             ProductItem(currentProduct) {
-                productViewModel.onSelectProduct(currentProduct!!)
+                mainViewModel.onSelectProduct(currentProduct!!)
                 navController.navigate(NavigationRoute.DetailScreenRoute.route)
             }
         }
@@ -149,40 +141,3 @@ fun ProductItem(currentProduct: Product?, onItemClick: () -> Unit) {
     }
 }
 
-inline fun <T : Any> LazyGridScope.items(
-    items: LazyPagingItems<T>,
-    crossinline itemContent: @Composable LazyGridItemScope.(item: T?) -> Unit
-) {
-    items(count = items.itemCount) { index ->
-        itemContent(items[index])
-    }
-}
-
-
-@Composable
-fun ShimmerImage(
-    imgUrl: String,
-    modifier: Modifier = Modifier,
-    contentDescription: String? = null,
-    colorShimmer: Color = Color.Gray
-) {
-    val painter =
-        rememberImagePainter(
-            data = imgUrl,
-            builder = {
-                crossfade(700)
-            })
-
-    val state = painter.state is AsyncImagePainter.State.Loading
-    Image(
-        modifier = modifier
-            .placeholder(
-                color = colorShimmer,
-                visible = state,
-                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-            ),
-        painter = painter,
-        contentScale = ContentScale.Crop,
-        contentDescription = contentDescription,
-    )
-}

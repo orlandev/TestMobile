@@ -25,8 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import com.orlandev.testmobile.MainViewModel
 import com.orlandev.testmobile.R
-import com.orlandev.testmobile.ui.screens.ProductViewModel
 import com.orlandev.testmobile.ui.screens.dev_screen.DevScreen
 import com.orlandev.testmobile.ui.screens.home.HomeScreen
 import com.orlandev.testmobile.ui.screens.login.LoginScreen
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NavigationGraph(
-    navController: NavHostController, homeScreenViewModel: ProductViewModel = hiltViewModel()
+    navController: NavHostController, mainViewModel: MainViewModel = hiltViewModel()
 ) {
 
     val appName = stringResource(id = R.string.app_name)
@@ -54,12 +54,12 @@ fun NavigationGraph(
 
     Scaffold(
         scaffoldState = scaffoldState,
+        drawerGesturesEnabled = !areInDetailScreen,
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
+                    .fillMaxWidth(),
                 elevation = 8.dp
             ) {
                 IconButton(modifier = Modifier, onClick = {
@@ -208,7 +208,7 @@ fun NavigationGraph(
                 areInDetailScreen = false
                 HomeScreen(
                     navController = navController,
-                    productViewModel = homeScreenViewModel
+                    mainViewModel = mainViewModel
                 )
             }
             composable(
@@ -218,7 +218,7 @@ fun NavigationGraph(
                 areInDetailScreen = true
                 DetailScreen(
                     navController = navController,
-                    productViewModel = homeScreenViewModel
+                    mainViewModel = mainViewModel
                 )
             }
 

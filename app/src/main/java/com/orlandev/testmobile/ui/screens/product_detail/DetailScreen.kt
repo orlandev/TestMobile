@@ -8,8 +8,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCartCheckout
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,50 +18,61 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberPermissionState
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
+import com.orlandev.testmobile.MainViewModel
 import com.orlandev.testmobile.domain.model.Product
-import com.orlandev.testmobile.ui.screens.ProductViewModel
-import com.orlandev.testmobile.ui.screens.home.ShimmerImage
 import com.orlandev.testmobile.ui.theme.TestMobileTheme
+import com.orlandev.testmobile.utils.ShimmerImage
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun DetailScreen(
     navController: NavController,
-    productViewModel: ProductViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    val currentProduct = productViewModel.productSelected
+    val currentProduct = mainViewModel.productSelected
 
-    //ACOMPANIST PERRMISIONS
-    // Track if the user doesn't want to see the rationale any more.
-    var doNotShowRationale = rememberSaveable { mutableStateOf(false) }
-
-    // FUSE Location permission state
-    val locationPermissionState = rememberPermissionState(
-        android.Manifest.permission.ACCESS_FINE_LOCATION
-    )
+    val fakeUserLocation = mainViewModel.userlocation.getUserLocation()
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.Gray)
+                .background(Color.Gray),
+            contentAlignment = Alignment.Center
         ) {
-            //MAP
+            Column {
+
+                val cameraPositionState = rememberCameraPositionState {
+                    position = CameraPosition.fromLatLngZoom(fakeUserLocation, 13f)
+                }
+                GoogleMap(
+                    modifier = Modifier.fillMaxSize(),
+                    cameraPositionState = cameraPositionState
+                ) {
+                    Marker(
+                        state = MarkerState(position = fakeUserLocation),
+                        title = "Fake User Position"
+                    )
+                }
+            }
         }
         CartWidget(
             modifier = Modifier.align(Alignment.BottomCenter),
             product = currentProduct.value
-        )
+        ) {
 
+        }
     }
 }
 
 
 @Composable
-fun CartWidget(modifier: Modifier = Modifier, product: Product?) {
+fun CartWidget(modifier: Modifier = Modifier, product: Product?, onClick: () -> Unit) {
     Card(shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp), modifier = modifier) {
         Column(
             modifier = Modifier
@@ -107,7 +116,8 @@ fun CartWidget(modifier: Modifier = Modifier, product: Product?) {
                 Button(
                     modifier = Modifier.align(Alignment.CenterEnd),
                     shape = CircleShape,
-                    onClick = { /*TODO*/ }) {
+                    onClick = onClick
+                ) {
 
                     Icon(Icons.Default.ShoppingCartCheckout, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
@@ -123,6 +133,6 @@ fun CartWidget(modifier: Modifier = Modifier, product: Product?) {
 @Composable
 fun CartWidgetPreview() {
     TestMobileTheme {
-        CartWidget(product = null)
+        CartWidget(product = null, onClick = {})
     }
 }

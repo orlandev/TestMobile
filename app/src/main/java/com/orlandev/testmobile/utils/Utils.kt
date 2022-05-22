@@ -11,6 +11,7 @@ import com.orlandev.testmobile.domain.model.Product
 import java.util.*
 import kotlin.random.Random
 
+
 fun generateFakeProducts(): List<Product> {
 
     val list = mutableListOf<Product>()

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -80,6 +81,11 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.1.0")
 
 
+    // Google Maps for COMPOSE
+    implementation 'com.google.maps.android:maps-compose:2.1.0'
+    // Make sure to also include the latest version of the Maps SDK for Android
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+
 
     //Accompanist
     def accompanist_version = "0.24.6-alpha"
@@ -89,7 +95,6 @@ dependencies {
     implementation "com.google.accompanist:accompanist-insets:$accompanist_version"
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
-    implementation "com.google.accompanist:accompanist-permissions:$accompanist_version"
 
     //For runBlockingTest, CoroutineDispatcher etc.
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
