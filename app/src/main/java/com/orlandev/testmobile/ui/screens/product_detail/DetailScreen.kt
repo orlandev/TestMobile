@@ -155,7 +155,6 @@ fun DetailScreen(
                             Text(stringResource(id = R.string.acept_alert_dialg).uppercase())
                         }
                     }
-
                 }
             )
         }

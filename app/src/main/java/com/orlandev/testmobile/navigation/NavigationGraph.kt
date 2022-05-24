@@ -31,7 +31,6 @@ import com.orlandev.testmobile.ui.screens.dev_screen.DevScreen
 import com.orlandev.testmobile.ui.screens.home.HomeScreen
 import com.orlandev.testmobile.ui.screens.login.LoginScreen
 import com.orlandev.testmobile.ui.screens.product_detail.DetailScreen
-import com.orlandev.testmobile.ui.screens.splash.SplashScreen
 import com.orlandev.testmobile.utils.ForegroundGradientEffect
 import kotlinx.coroutines.launch
 
@@ -183,16 +182,9 @@ fun NavigationGraph(
                 .fillMaxSize()
                 .padding(it),
             navController = navController,
-            startDestination = NavigationRoute.HomeScreenRoute.route
+            startDestination = NavigationRoute.LoginRoute.route
         )
         {
-
-            composable(
-                route = NavigationRoute.SplashRoute.route,
-            )
-            {
-                SplashScreen(navController = navController)
-            }
 
             composable(
                 route = NavigationRoute.LoginRoute.route,
