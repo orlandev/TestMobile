@@ -12,7 +12,9 @@ import com.orlandev.testmobile.domain.api.ApiService
 import com.orlandev.testmobile.domain.model.Product
 import com.orlandev.testmobile.domain.providers.ILocationProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,6 +34,39 @@ class MainViewModel @Inject constructor(
 
      fun onSelectProduct(product: Product) {
           productSelected.value = product
+     }
+
+     //Buy product simulation
+     private val _userBuyProduct = mutableStateOf<Boolean>(false)
+     val userBuyProduct = _userBuyProduct
+
+     private val _showRequest = mutableStateOf<Boolean>(false)
+     val showRequest = _showRequest
+
+     private val _userAskAddToCart = mutableStateOf<Boolean>(false)
+     val userAskAddToCart = _userAskAddToCart
+
+     fun onAskUserBuy() {
+          _userAskAddToCart.value = true
+     }
+
+     fun onClearAskUserBuy() {
+          _userAskAddToCart.value = false
+     }
+
+
+     fun onUserBuyProduct() {
+          viewModelScope.launch {
+               _showRequest.value = true
+               delay(2000) //Espera dos segundos para simular una peticion a un API en  internet
+               _showRequest.value = false
+               _userBuyProduct.value = true
+          }
+     }
+
+     fun clearUserBuy() {
+          _userBuyProduct.value = false
+          _showRequest.value = false
      }
 
 }

@@ -8,4 +8,10 @@
     <string name="close_session">Cerrar sesión</string>
     <string name="open_drawer_menu">Abrir menu</string>
     <string name="go_back">Ir hacia atrás</string>
+    <string name="add_to_cart_text_alert_dialog">Deseas comprar este producto?</string>
+    <string name="no_alert_dialg">NO</string>
+    <string name="yes_alert_dialg">SI</string>
+    <string name="process_request">Procesando la compra...</string>
+    <string name="buy_sucessfull">La compra se ha completado con exito.</string>
+    <string name="acept_alert_dialg">Aceptar</string>
 </resources>

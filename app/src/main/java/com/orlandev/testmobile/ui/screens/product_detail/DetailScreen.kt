@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +25,9 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.orlandev.testmobile.MainViewModel
+import com.orlandev.testmobile.R
 import com.orlandev.testmobile.domain.model.Product
+import com.orlandev.testmobile.navigation.NavigationRoute
 import com.orlandev.testmobile.ui.theme.TestMobileTheme
 import com.orlandev.testmobile.utils.ShimmerImage
 
@@ -36,6 +39,7 @@ fun DetailScreen(
     val currentProduct = mainViewModel.productSelected
 
     val fakeUserLocation = mainViewModel.userlocation.getUserLocation()
+
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 
@@ -65,7 +69,95 @@ fun DetailScreen(
             modifier = Modifier.align(Alignment.BottomCenter),
             product = currentProduct.value
         ) {
+            mainViewModel.onAskUserBuy()
+        }
 
+        // Mostramos un cuadro de dialogo para verificar la compra del prouducto
+        if (mainViewModel.userAskAddToCart.value) {
+            AlertDialog(
+                onDismissRequest = {
+                    mainViewModel.onClearAskUserBuy()
+                },
+                title = {
+                    Text(text = stringResource(id = R.string.app_name))
+                },
+                text = {
+                    Text(text = stringResource(id = R.string.add_to_cart_text_alert_dialog))
+                },
+                buttons = {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        OutlinedButton(
+                            modifier = Modifier.weight(3f),
+                            onClick = { mainViewModel.onClearAskUserBuy() }
+                        ) {
+                            Text(stringResource(id = R.string.no_alert_dialg))
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            modifier = Modifier.weight(3f),
+                            onClick = {
+                                mainViewModel.onUserBuyProduct()
+                                mainViewModel.onClearAskUserBuy()
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.yes_alert_dialg))
+                        }
+                    }
+                }
+            )
+        }
+
+        if (mainViewModel.showRequest.value) {
+            AlertDialog(
+                onDismissRequest = {
+                },
+                text = {
+
+                    Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(text = stringResource(id = R.string.process_request))
+                    }
+
+                },
+                buttons = { }
+            )
+        }
+
+        if (mainViewModel.userBuyProduct.value) {
+            AlertDialog(
+                onDismissRequest = {
+                    mainViewModel.clearUserBuy()
+                },
+                text = {
+                    Text(text = stringResource(id = R.string.buy_sucessfull))
+                },
+                buttons = {
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(all = 8.dp),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+
+                        Button(
+                            onClick = {
+                                mainViewModel.clearUserBuy()
+                                navController.navigate(NavigationRoute.HomeScreenRoute.route)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.acept_alert_dialg).uppercase())
+                        }
+                    }
+
+                }
+            )
         }
     }
 }
