@@ -14,4 +14,5 @@ algunas librerias de terceros que nos permiten agilizar el proceso de creacion d
 #### Dagger Hilt ( Injección de dependencias ) 
 #### Jetpack Compose Navigation
 #### Coil 2.1.0 ( Image Loading Library )
+#### Firebase Auth
 
