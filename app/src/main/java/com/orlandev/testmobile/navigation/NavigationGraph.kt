@@ -25,6 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import com.google.firebase.auth.FirebaseAuth
 import com.orlandev.testmobile.MainViewModel
 import com.orlandev.testmobile.R
 import com.orlandev.testmobile.ui.screens.dev_screen.DevScreen
@@ -59,7 +60,7 @@ fun NavigationGraph(
             TopAppBar(
                 modifier = Modifier
                     .fillMaxWidth(),
-                elevation = 8.dp
+                elevation = 8.dp,
             ) {
                 IconButton(modifier = Modifier, onClick = {
                     if (areInDetailScreen) {
@@ -86,6 +87,7 @@ fun NavigationGraph(
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = appBarTitle)
+                Text(text = FirebaseAuth.getInstance().currentUser?.displayName.toString())
             }
         },
         drawerContent = {
@@ -171,8 +173,9 @@ fun NavigationGraph(
                 ) {
                     scope.launch {
                         scaffoldState.drawerState.close()
+                        FirebaseAuth.getInstance().signOut()
                     }
-                    //TODO( CLOSE USER SESSION )
+
                 }
             }
         }
