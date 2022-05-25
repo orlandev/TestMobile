@@ -31,4 +31,5 @@
     <string name="ok">Aceptar</string>
     <string name="sign_with_facebook_text">Iniciar sesión con Facebook</string>
     <string name="sign_with_google_text">Iniciar sesión con Google</string>
+    <string name="default_web_client_id">TOKEN WEB CLIENT</string>
 </resources>
