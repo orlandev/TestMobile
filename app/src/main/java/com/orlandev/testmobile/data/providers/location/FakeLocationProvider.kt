@@ -1,4 +1,4 @@
-package com.orlandev.testmobile.providers.location
+package com.orlandev.testmobile.data.providers.location
 
 import com.google.android.gms.maps.model.LatLng
 import com.orlandev.testmobile.domain.providers.ILocationProvider

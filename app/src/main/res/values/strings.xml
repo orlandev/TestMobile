@@ -1,17 +1,34 @@
 <resources>
     <string name="app_name">TestMobile</string>
     <string name="home">Inicio</string>
-    <string name="loading_products">Cargando...</string>
+    <string name="loading_products">Cargando…</string>
     <string name="profile">Perfil</string>
     <string name="user_products">Mis Productos</string>
     <string name="settings">Configuraciones</string>
     <string name="close_session">Cerrar sesión</string>
-    <string name="open_drawer_menu">Abrir menu</string>
+    <string name="open_drawer_menu">Abrir menú</string>
     <string name="go_back">Ir hacia atrás</string>
     <string name="add_to_cart_text_alert_dialog">Deseas comprar este producto?</string>
     <string name="no_alert_dialg">NO</string>
     <string name="yes_alert_dialg">SI</string>
-    <string name="process_request">Procesando la compra...</string>
+    <string name="process_request">Procesando la compra…</string>
     <string name="buy_sucessfull">La compra se ha completado con exito.</string>
     <string name="acept_alert_dialg">Aceptar</string>
+    <string name="erro_login">ha ocurrido un error en el login.</string>
+    <string name="not_implemented_yet">NOT IMPLEMENTED YET</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="some_text">Some texts</string>
+    <string name="sign_in_text">Registrate</string>
+    <string name="facebook_signin">facebook</string>
+    <string name="signing">Login</string>
+    <string name="google_signin">Login Google</string>
+    <string name="next">Siguiente</string>
+    <string name="sign_with_text">O inicia sesión con</string>
+    <string name="login_with_simple_account">Inicia sesión con tu cuenta</string>
+    <string name="user_name_text">Nombre de usuario</string>
+    <string name="password_text">Contraseña</string>
+    <string name="forget_password_text">Has olvidado tu contraseña?</string>
+    <string name="ok">Aceptar</string>
+    <string name="sign_with_facebook_text">Iniciar sesión con Facebook</string>
+    <string name="sign_with_google_text">Iniciar sesión con Google</string>
 </resources>

@@ -1,10 +1,10 @@
 package com.orlandev.testmobile.di
 
 import com.orlandev.testmobile.data.api.FakeApiService
+import com.orlandev.testmobile.data.providers.location.FakeLocationProvider
 import com.orlandev.testmobile.data.source.remote.FakeRemoteDataSource
 import com.orlandev.testmobile.domain.api.ApiService
 import com.orlandev.testmobile.domain.providers.ILocationProvider
-import com.orlandev.testmobile.providers.location.FakeLocationProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
