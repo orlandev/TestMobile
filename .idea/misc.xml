@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/compose-model-1653143781307.xml" value="0.4657039711191336" />
+        <entry key="../../../../layout/compose-model-1653231640588.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1653233143551.xml" value="1.0" />
+        <entry key="../../../../layout/compose-model-1653233158960.xml" value="0.38981481481481484" />
+        <entry key="../../../../layout/compose-model-1653234533422.xml" value="0.38981481481481484" />
+        <entry key="../../../../layout/compose-model-1653443503448.xml" value="0.1925925925925926" />
+        <entry key="../../../../layout/compose-model-1653444094604.xml" value="0.1925925925925926" />
+        <entry key="app/src/main/res/drawable/ic_facebook_signin.xml" value="0.229" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
