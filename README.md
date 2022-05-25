@@ -2,7 +2,7 @@
 TEST PRÁCTICO – MOBILE
 
 TestMobile es una simulacion de una app de ventas de productos, fue creada utilizando la arquitectura MVVM y
-algunas librerias de terceros que nos permiten agilizar el proceso de creacion de una app.
+algunas librerias de terceros que nos permiten agilizar See what changedel proceso de creacion de una app.
 
 ## Herramientas utilizadas
 
